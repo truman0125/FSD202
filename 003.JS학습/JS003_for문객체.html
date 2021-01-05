@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>객체를 위한 for문</title>
+    <script>
+        var mv1 = { // <-객체
+            "포스터":"https://movie-phinf.pstatic.net/20201210_67/16075674941928UiW2_JPEG/movie_image.jpg?type=m99_141_2",
+            "제목":"소울",
+            "개요":"애니메이션",
+            "감독":"피트 닥터",
+            "출연":"제이미 폭스, 티나 페이, 다비드 딕스",
+            "문구":"소울 보러 오세요"
+        }; 
+        var mv2 = { // <-객체
+            "포스터":"https://movie-phinf.pstatic.net/20201016_57/1602825730488uMSbb_JPEG/movie_image.jpg?type=m99_141_2",
+            "제목":"분노의 질주: 더 얼티메이트",
+            "개요":"액션 ",
+            "감독":"저스틴 린",
+            "출연":"빈 디젤, 존 시나, 샤를리즈 테론",
+            "문구":"무한질주 함께 달려요!"
+        }; 
+        var mv3 = { // <-객체
+            "포스터":"https://movie-phinf.pstatic.net/20201012_127/160248787248943gpN_JPEG/movie_image.jpg?type=m99_141_2",
+            "제목":"쥬라기 월드: 도미니언",
+            "개요":"액션, 모험",
+            "감독":"콜린 트레보로우",
+            "출연":"크리스 프랫, 브라이스 달라스 하워드",
+            "문구":"공룡이닷~ 도망쳐!!"
+        }; 
+            
+        /*//////////////////////////////
+            함수명: chgMV          
+            기능: 영화별 정보를 객체로부터 셋팅함
+        *///////////////////////////////
+        function chgMV(num){//num-구분전달값
+            // 1. 함수호출여부
+            console.log("나야나!"+num);
+            
+            // 2. 변경대상: .photo, .tit, .sum, .dir, .act
+            var photo = document.getElementsByClassName("photo")[0];            
+            var tit = document.getElementsByClassName("tit")[0];
+            var sum = document.getElementsByClassName("sum")[0];
+            var dir = document.getElementsByClassName("dir")[0];
+            var act = document.getElementsByClassName("act")[0];
+            
+            // 3. 객체 선택하기
+            // 객체담을 변수
+            var obj;
+            
+            switch(num){
+                case 1: obj = mv1; break
+                case 2: obj = mv2; break
+                case 3: obj = mv3; break
+            }/// switch case //////////
+            
+            // for문 돌리기
+            // 일반 for문: for(시;한;증){구현코드}
+            // for in문: for(var 변수명 in 객체){구현코드}
+            for(var x in obj){
+                console.log(x);
+                // x는 속성명
+                console.log(obj[x]);
+                // obj[x]는 속성값
+                
+                // 분기(구분)
+                switch(x){
+                    case "포스터":photo.innerHTML = '<img src="'+obj[x]+'" alt="포스터">'; break;
+                    case "제목": tit.innerHTML = obj[x]; break;
+                    case "개요": sum.innerHTML = "▣ "+x+": "+obj[x]; break;
+                    case "감독": dir.innerHTML = "▣ "+x+": "+obj[x]; break;
+                    case "출연": act.innerHTML = "▣ "+x+": "+obj[x]; break;
+                }//// switch case /////////
+            }//// for //////////////
+            
+            /// 영화표현문고 넣기
+            console.log("문구는?"+obj["문구"]);
+            
+            // 문구넣기 대상
+            var show = document.getElementById("show");
+            show.innerHTML = "";//초기화(기존값 지우기 빈값으로 덮어쓰기)
+            
+            // for of로 문자 자르기
+            // 문자를 담은 변수를 for of에 적용하면 문자를 한글자씩 나누어 for문을 개수만큼 돌아준다!
+            for(var txt of obj["문구"]){
+                console.log(txt);
+                
+                if(txt!==" ")//공백이 아니면 span에 글자넣기!
+                    show.innerHTML += "<span>"+txt+"</span>"   
+                else// 스페이스바 공백이면 &nbsp;
+                    // 공백처리 html특수기호
+                    show.innerHTML += "&nbsp;&nbsp;&nbsp;"
+                
+                
+                /*show.innerHTML += "<span>"+txt+"</span>"*/
+                
+            } //// for ///////////////////
+            
+        }/////// chgMV 함수 ///////////
+        ////////////////////////////////
+        
+    
+    </script>
+    
+    <style>
+        .fl{
+            float: left;
+        }
+        .photo img{
+            height: 200px;
+            margin-right: 20px;
+        }
+        .cont{
+            background-color: lightpink;
+        }
+        /*글자나오기*/
+        #show span{
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 5px solid #ff3aff;
+            background-color: #00f;
+            font-size: 30px;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
+        }
+    
+    
+    </style>
+</head>
+<body>
+    <h1>영화정보</h1>
+    <div id="show"></div>
+    
+    <button onclick="chgMV(1)">소울</button>
+    <button onclick="chgMV(2)">분노의 질주: 더 얼티메이트</button>
+    <button onclick="chgMV(3)">쥬라기 월드: 도미니언</button>
+    
+    <hr>
+    <div class="photo fl"></div>
+    <div class="cont fl">
+        <h2 class="tit"></h2>
+        <h3 class="sum"></h3>
+        <h3 class="dir"></h3>
+        <h3 class="act"></h3>
+    </div>
+  
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</body>
+</html>
